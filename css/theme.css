@@ -1,0 +1,32 @@
+:root {
+  --font-color: #000;
+  --night-font-color: #ddd;
+  --primary: #8ee4af;
+  --secondary: #61c5ab;
+  --dark: #2f4858;
+  --gradient-light: #8ee4af;
+  --gradient-middle: #42a5a1;
+  --gradient-dark: #022249;
+  --code-gradient-light: #8ee4af;
+  --code-gradient-dark: #42a5a1;
+  --maxwidth: 1284px;
+}
+.gradient-text {
+  background: var(--primary) !important;
+  background: -webkit-linear-gradient(to right, var(--primary), var(--secondary), var(--dark)) !important;
+  background: linear-gradient(to right, var(--primary), var(--secondary), var(--dark)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-box-decoration-break: clone !important;
+  box-decoration-break: clone !important;
+}
+.gradient-bg {
+  background: var(--primary) !important;
+  background: -webkit-linear-gradient(to right, var(--primary), var(--secondary), var(--dark)) !important;
+  background: linear-gradient(to right, var(--primary), var(--secondary), var(--dark)) !important;
+}
+.gradient-bg-rev {
+  background: var(--primary) !important;
+  background: -webkit-linear-gradient(to right, var(--dark), var(--secondary), var(--primary)) !important;
+  background: linear-gradient(to right, var(--dark), var(--secondary), var(--primary)) !important;
+}

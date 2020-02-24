@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>How To Replace a lost Key Pair with new one on an EC2 instance</title>
+      <link href="/2015/10/30/how-to-replace-a-lost-key-pair-with-new-one-on-an-ec2-instance/"/>
+      <url>/2015/10/30/how-to-replace-a-lost-key-pair-with-new-one-on-an-ec2-instance/</url>
+      
+        <content type="html"><![CDATA[<p>Access to Amazon <a href="http://aws.amazon.com/ec2/" target="_blank" rel="noopener">EC2</a> instances specially the Linux instances are always protected by a private key pair. Private key is only the way to get access to the instance, what if you lost the key? Is your servers lost in black hole? Thankfully nothing is lost you still can access your server, let me show you how can you solve this problem.<br>            <img src="https://opensourceholic.files.wordpress.com/2015/10/30f249d.jpg" alt="AmazonEC2"></p><p>Before we proceed please not that to do this we need to stop our running instance that means what ever app or website running on the serer will be offline for that period. In order to do this process we need the EC2 root volume to be an <a href="http://aws.amazon.com/ebs/" target="_blank" rel="noopener">EBS</a>. </p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Launch-New-Instance"><a href="#Launch-New-Instance" class="headerlink" title="Launch New Instance"></a>Launch New Instance</h3><p>First thing we need is to start and one instance with a key pair that we can access we will use this instance for recovering the old EBS. New instance must be created in same Availability Zone of the original instance. Firstly we will note down the original instance AZ.</p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446188775565.jpg" alt="Check Zone"></p><p>Now we will launch the new instance using the Launch Instance wizard, make sure that we are launching the instance same AZ in which our original instance is. You can chose AZ from *<em>subnet *</em>as shown in below image. </p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446188985851.jpg" alt="Launch Wizard"></p><p>Before we actually launch the instance we will see the key pair section from there we will create and download a new key pair and then we will launch the instance.</p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446189267596.jpg" alt="Create New Key Pair"></p><h3 id="Stop-Original-Instance"><a href="#Stop-Original-Instance" class="headerlink" title="Stop Original Instance"></a>Stop Original Instance</h3><p>When the new instance is ready, now we will detach the volume of original instance and attach it to new instance, in order to do that we need to stop the original instance. To stop the instance right click on the instance go to Instance State and chose Stop option.</p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446189440828.jpg" alt="Stop Instance"></p><h3 id="Detach-Volume"><a href="#Detach-Volume" class="headerlink" title="Detach Volume"></a>Detach Volume</h3><p>Now our instance is stop then we go to the volume section in EC2 console. Here we will look for the original instance root volume, using the <code>Attachment Information</code>.This column shows to which instance the volume is attach and its device path usually the root drive path is <code>/dev/sad1.</code>Now we will Detach the volume from original instance, in order to do that right click on volume and chose Detach Volume option.</p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446189973622.jpg" alt="Detach Volume"></p><h3 id="Attach-Volume"><a href="#Attach-Volume" class="headerlink" title="Attach Volume"></a>Attach Volume</h3><p>Once we detach the volume, now we need to attach the volume to the Recovery instance, right click on the volume and chose Attach Volume option in dialog we will select the Recovery instance and also add a device path as <code>/dev/xvdf</code> (or <code>/dev/sdf</code>)</p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/selection_002.png" alt="Attach Volume"></p><p>Once we attach the volume to recovery instance we are now ready to mount that in same instance. We can access the instance using the key pair generated during the instance launch. To access instance use below command</p><p> Setting the rigth permissions for the .pem file: </p><pre><code class="bash"> $ chmod 600 NewKeyPair.pem </code></pre><p> Connecting to the instance using the certificate: </p><pre><code class="bash"> $ ssh -i NewKeyPair.pem ubuntu@public_ip</code></pre><h3 id="Copy-Key"><a href="#Copy-Key" class="headerlink" title="Copy Key"></a>Copy Key</h3><p>Once you are connected to the instance now we have to mount the attach volume and copy the <code>authorized_keys</code> file from new instance to the mounted drive at same location. Use below command to mount and copy the file.</p><p>Becoming root: </p><pre><code class="bash">$ sudo -i </code></pre><p>Creating the mount point:</p><pre><code class="bash">$ mkdir /mnt/original</code></pre><p>Mounting the volume: </p><pre><code class="bash">$ mount /dev/xvdf /mnt/original</code></pre><p>Replace the authorized_keys file with the new one. Now access to the Old instance will be possible only using the new pem. Path and name of file depends on the Linux Flavor you are using.</p><pre><code class="bash">cat /home/ubuntu/.ssh/authorized_keys &gt; /mnt/original/home/ubuntu/.ssh/authorized_keys </code></pre><p>Unmunt the volume:</p><pre><code class="bash">$ umount /mnt/original/</code></pre><p>Once we are done with copying the keys, now we will detach the volume from recovery instance by right clicking on volume and choosing the detach volume option as we do it earlier. After that we will re-attach it to the Original instance, make sure when you are re-attaching the volume that should on on root path so enter <code>/dev/sda1</code> in device path option.</p><p><img src="https://opensourceholic.files.wordpress.com/2015/10/selection_003.png" alt="Originalvolume"></p><h3 id="Access-Using-New-Key"><a href="#Access-Using-New-Key" class="headerlink" title="Access Using New Key"></a>Access Using New Key</h3><p>Now we can start the original instance back, and now you can access it using the new key pair.</p><p>You can use same steps in case your machine is not accessible and you want access to your data in EBS.</p><p>Hope you find this tutorial helpful. Feel free to ask questions! Don’t forget to like or to leave a comment if its really help you.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AWS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> geek </tag>
+            
+            <tag> amazon </tag>
+            
+            <tag> EC2 </tag>
+            
+            <tag> pem </tag>
+            
+            <tag> AWS </tag>
+            
+            <tag> access </tag>
+            
+            <tag> KeyPair </tag>
+            
+            <tag> recover </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
