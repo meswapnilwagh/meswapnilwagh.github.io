@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>How To Replace a lost Key Pair with new one on an EC2 instance - meswapnilwagh</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="meswapnilwagh opensourceholic geek aws linux howto guide tutorial,"> 
+    <meta name="description" content="Access to Amazon EC2 instances specially the Linux instances are always protected by a private key ,"> 
+    <meta name="author" content="meswapnilwagh"> 
+    <link rel="alternative" href="atom.xml" title="meswapnilwagh" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">meswapnilwagh</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://meswapnilwagh.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">How To Replace a lost Key Pair with new one on an EC2 instance</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="weibo,douban,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/welcome-cover.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/AWS"><b>「
+                    </b>AWS<b> 」</b></a>
+                
+                February 24, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/02/24/how-to-replace-a-lost-key-pair-with-new-one-on-an-ec2-instance/" title="How To Replace a lost Key Pair with new one on an EC2 instance" class="">How To Replace a lost Key Pair with new one on an EC2 instance</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    6.2k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    6 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/AWS/" rel="tag">AWS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/EC2/" rel="tag">EC2</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/KeyPair/" rel="tag">KeyPair</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/access/" rel="tag">access</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/amazon/" rel="tag">amazon</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/geek/" rel="tag">geek</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/pem/" rel="tag">pem</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/recover/" rel="tag">recover</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>Access to Amazon <a href="http://aws.amazon.com/ec2/" target="_blank" rel="noopener">EC2</a> instances specially the Linux instances are always protected by a private key pair. Private key is only the way to get access to the instance, what if you lost the key? Is your servers lost in black hole? Thankfully nothing is lost you still can access your server, let me show you how can you solve this problem.<br>            <img src="https://opensourceholic.files.wordpress.com/2015/10/30f249d.jpg" alt="AmazonEC2"></p>
+<p>Before we proceed please not that to do this we need to stop our running instance that means what ever app or website running on the serer will be offline for that period. In order to do this process we need the EC2 root volume to be an <a href="http://aws.amazon.com/ebs/" target="_blank" rel="noopener">EBS</a>. </p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Launch-New-Instance"><a href="#Launch-New-Instance" class="headerlink" title="Launch New Instance"></a>Launch New Instance</h3><p>First thing we need is to start and one instance with a key pair that we can access we will use this instance for recovering the old EBS. New instance must be created in same Availability Zone of the original instance. Firstly we will note down the original instance AZ.</p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446188775565.jpg" alt="Check Zone"></p>
+<p>Now we will launch the new instance using the Launch Instance wizard, make sure that we are launching the instance same AZ in which our original instance is. You can chose AZ from *<em>subnet *</em>as shown in below image. </p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446188985851.jpg" alt="Launch Wizard"></p>
+<p>Before we actually launch the instance we will see the key pair section from there we will create and download a new key pair and then we will launch the instance.</p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446189267596.jpg" alt="Create New Key Pair"></p>
+<h3 id="Stop-Original-Instance"><a href="#Stop-Original-Instance" class="headerlink" title="Stop Original Instance"></a>Stop Original Instance</h3><p>When the new instance is ready, now we will detach the volume of original instance and attach it to new instance, in order to do that we need to stop the original instance. To stop the instance right click on the instance go to Instance State and chose Stop option.</p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446189440828.jpg" alt="Stop Instance"></p>
+<h3 id="Detach-Volume"><a href="#Detach-Volume" class="headerlink" title="Detach Volume"></a>Detach Volume</h3><p>Now our instance is stop then we go to the volume section in EC2 console. Here we will look for the original instance root volume, using the <code>Attachment Information</code>.This column shows to which instance the volume is attach and its device path usually the root drive path is <code>/dev/sad1.</code>Now we will Detach the volume from original instance, in order to do that right click on volume and chose Detach Volume option.</p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/1446189973622.jpg" alt="Detach Volume"></p>
+<h3 id="Attach-Volume"><a href="#Attach-Volume" class="headerlink" title="Attach Volume"></a>Attach Volume</h3><p>Once we detach the volume, now we need to attach the volume to the Recovery instance, right click on the volume and chose Attach Volume option in dialog we will select the Recovery instance and also add a device path as <code>/dev/xvdf</code> (or <code>/dev/sdf</code>)</p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/selection_002.png" alt="Attach Volume"></p>
+<p>Once we attach the volume to recovery instance we are now ready to mount that in same instance. We can access the instance using the key pair generated during the instance launch. To access instance use below command</p>
+<p> Setting the rigth permissions for the .pem file: </p>
+<pre><code class="bash"> $ chmod 600 NewKeyPair.pem </code></pre>
+<p> Connecting to the instance using the certificate: </p>
+<pre><code class="bash"> $ ssh -i NewKeyPair.pem ubuntu@public_ip</code></pre>
+<h3 id="Copy-Key"><a href="#Copy-Key" class="headerlink" title="Copy Key"></a>Copy Key</h3><p>Once you are connected to the instance now we have to mount the attach volume and copy the <code>authorized_keys</code> file from new instance to the mounted drive at same location. Use below command to mount and copy the file.</p>
+<p>Becoming root: </p>
+<pre><code class="bash">$ sudo -i </code></pre>
+<p>Creating the mount point:</p>
+<pre><code class="bash">$ mkdir /mnt/original</code></pre>
+<p>Mounting the volume: </p>
+<pre><code class="bash">$ mount /dev/xvdf /mnt/original</code></pre>
+<p>Replace the authorized_keys file with the new one. Now access to the Old instance will be possible only using the new pem. Path and name of file depends on the Linux Flavor you are using.</p>
+<pre><code class="bash">cat /home/ubuntu/.ssh/authorized_keys &gt; /mnt/original/home/ubuntu/.ssh/authorized_keys </code></pre>
+<p>Unmunt the volume:</p>
+<pre><code class="bash">$ umount /mnt/original/</code></pre>
+<p>Once we are done with copying the keys, now we will detach the volume from recovery instance by right clicking on volume and choosing the detach volume option as we do it earlier. After that we will re-attach it to the Original instance, make sure when you are re-attaching the volume that should on on root path so enter <code>/dev/sda1</code> in device path option.</p>
+<p><img src="https://opensourceholic.files.wordpress.com/2015/10/selection_003.png" alt="Originalvolume"></p>
+<h3 id="Access-Using-New-Key"><a href="#Access-Using-New-Key" class="headerlink" title="Access Using New Key"></a>Access Using New Key</h3><p>Now we can start the original instance back, and now you can access it using the new key pair.</p>
+<p>You can use same steps in case your machine is not accessible and you want access to your data in EBS.</p>
+<p>Hope you find this tutorial helpful. Feel free to ask questions! Don’t forget to like or to leave a comment if its really help you.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci=''
+        data-cs=''
+        data-r='blog-comments'
+        data-o=''
+        data-a=''
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>meswapnilwagh</p>
+                    <span>Explore an unexplored horizon of Open Source with Me</span>
+                    <dl>
+                        <dd><a href="https://github.com/meswapnilwagh" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/meswapniwlagh" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">2 <p>Articles</p></a></li>
+                    <li><a href="/categories">2 <p>Categories</p></a></li>
+                    <li><a href="/tags">25 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Launch-New-Instance"><span class="toc-number">1.1.</span> <span class="toc-text">Launch New Instance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stop-Original-Instance"><span class="toc-number">1.2.</span> <span class="toc-text">Stop Original Instance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Detach-Volume"><span class="toc-number">1.3.</span> <span class="toc-text">Detach Volume</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attach-Volume"><span class="toc-number">1.4.</span> <span class="toc-text">Attach Volume</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy-Key"><span class="toc-number">1.5.</span> <span class="toc-text">Copy Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Access-Using-New-Key"><span class="toc-number">1.6.</span> <span class="toc-text">Access Using New Key</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            meswapnilwagh
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Explore an unexplored horizon of Open Source with Me", "Explore an unexplored horizon of Open Source with Me"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

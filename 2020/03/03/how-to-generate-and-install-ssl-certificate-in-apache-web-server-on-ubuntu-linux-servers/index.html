@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>How To Generate &amp; Install SSL Certificate In Apache Web Server On Ubuntu - meswapnilwagh</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="meswapnilwagh opensourceholic geek aws linux howto guide tutorial,"> 
+    <meta name="description" content="SSL, Secure Socket Layer is a protocol created in order to place normal traffic between server and ,"> 
+    <meta name="author" content="meswapnilwagh"> 
+    <link rel="alternative" href="atom.xml" title="meswapnilwagh" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">meswapnilwagh</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://meswapnilwagh.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">How To Generate & Install SSL Certificate In Apache Web Server On Ubuntu</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="weibo,douban,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/secure.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/SSL"><b>「
+                    </b>SSL<b> 」</b></a>
+                
+                March 03, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/03/how-to-generate-and-install-ssl-certificate-in-apache-web-server-on-ubuntu-linux-servers/" title="How To Generate &amp; Install SSL Certificate In Apache Web Server On Ubuntu" class="">How To Generate &amp; Install SSL Certificate In Apache Web Server On Ubuntu</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    9.3k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    8 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/301/" rel="tag">301</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Apache-web-server/" rel="tag">Apache web server</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Certificates/" rel="tag">Certificates</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/SSL/" rel="tag">SSL</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/SSL-certificates/" rel="tag">SSL certificates</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ubuntu-server/" rel="tag">Ubuntu server</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/VirtualHost/" rel="tag">VirtualHost</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/crt/" rel="tag">crt</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/csr/" rel="tag">csr</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/http/" rel="tag">http</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/https/" rel="tag">https</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/key/" rel="tag">key</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openSSL/" rel="tag">openSSL</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/permanat/" rel="tag">permanat</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/redirect/" rel="tag">redirect</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/self-signed/" rel="tag">self-signed</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p><strong>SSL</strong>, Secure Socket Layer is a protocol created in order to place normal traffic between server and client in encrypted and protected wrapper, without any possibility of traffic being intercepted in between of transmission. SSL certificates encrypt a site information and create more secure and trusted connection. Certificates can show server’s identification information to site visitors. Certificates Authorities like <a href="http://www.digicert.com/" target="_blank" rel="noopener">DigiCert</a> , <a href="http://godaddy.com/" target="_blank" rel="noopener">GoDaddy</a> can issue the self-signed SSL certificates that verify the server information. In this guide I will cover how to create a <strong>self-signed SSL certificates</strong> for Apache on an Ubuntu Server which will encrypt traffic to your server. As we are generating SSL certificates are for testing purpose and not issued by any Certificates Authorities it will not provide third party validation of your server identity, but still it will help you to transfer information securely.</p>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites:"></a>Prerequisites:</h3><p>You need a Ubuntu server and a user with root / sudo privileges. You also need a Apache web server installed if its not there you can use following command to install Apache.</p>
+<pre><code class="bash">$ sudo apt-get update 
+$ sudo apt-get install apache2</code></pre>
+<h3 id="Step-1-Enable-SSL-module-in-Apache"><a href="#Step-1-Enable-SSL-module-in-Apache" class="headerlink" title="Step 1: Enable SSL module in Apache:"></a>Step 1: Enable SSL module in Apache:</h3><p>In order to setup SSL certificates in Apache web server we need to enable the pre-installed Apache module. To enable SSL module in Apache use below command.</p>
+<pre><code class="bash">$ sudo a2enmod ssl</code></pre>
+<p>Once you enable the module we need to restart the Apache server for changes to be applied. Use below command to restart Apache:</p>
+<pre><code class="bash">$ sudo service apache2 restart</code></pre>
+<p>Now our server is ready to setup SSL.</p>
+<h3 id="Step-2-Generate-a-Self-Signed-Certificates"><a href="#Step-2-Generate-a-Self-Signed-Certificates" class="headerlink" title="Step 2: Generate a Self-Signed Certificates:"></a>Step 2: Generate a Self-Signed Certificates:</h3><p>We will create a new directory where we will store server key and certificates.</p>
+<pre><code class="bash">$ sudo mkdir /etc/apache2/ssl</code></pre>
+<p>First you generate the keys for the Certificate Signing Request (CSR)</p>
+<pre><code class="bash">$ cd /etc/apache2/ssl 
+$ sudo openssl genrsa -des3 -out yourdomain.pkey 2048</code></pre>
+<p>It will prompt you to enter passphrase. Its up to you to enter a passphrase or not. If you do, every time you restart the Apache service you will ask for this passphrase. We will enter a passphrase and then will create a ‘insecure’ key from ‘secure’ one. Create a insure key without a passphrase form a secure key <em><strong>yourdomain.pkey.</strong></em></p>
+<pre><code class="bash">$ sudo openssl rsa -in yourdomain.pkey -out yourdomain.key</code></pre>
+<p>And now we will create a CSR from the key file. With the CSR and key file a self-signed certificate can be generated.</p>
+<pre><code class="bash">$ sudo openssl req -new -key yourdomain.key -out yourdomain.csr</code></pre>
+<p>Once enter will ask you number of questions one most important is Common Name use your domain or IP of you server as a value.</p>
+<pre><code class="bash">You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:New York
+Locality Name (eg, city) []:NYC
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Organization Pvt. Ltd
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:yourdomain.com
+Email Address []:webmaster@yourdomain.com</code></pre>
+<p>Once we have CSR and key file now we can generate a self-signed certificate using following command</p>
+<pre><code class="bash">$ sudo openssl x509 -req -days 365 -in yourdomain.csr -signkey yourdomain.key -out yourdomain.crt</code></pre>
+<h3 id="Step-3-Configure-Apache-to-use-the-Signed-SSL-Certificate"><a href="#Step-3-Configure-Apache-to-use-the-Signed-SSL-Certificate" class="headerlink" title="Step 3 : Configure Apache to use the Signed SSL Certificate :"></a>Step 3 : Configure Apache to use the Signed SSL Certificate :</h3><p>Now that we have all our necessary certificates and key file available, now we can configure Apache to use these in VirtualHost. Next, add an entry to <code>/etc/apache2/ports.conf</code> for the domain you’ll be using to host your SSL-enabled site.</p>
+<pre><code class="bash">NameVirtualHost yourdomain.com:443</code></pre>
+<p>Now create  a Apache configuration file with VirtualHost entry for your site. Create a file <code>yourdomain-ssl</code> with below contain in <code>/etc/apache2/site-available/</code>folder of Apache.</p>
+<pre><code class="config">&lt;VirtualHost yourdomain.com:443&gt;
+    SSLEngine On
+    SSLCertificateFile /etc/apache2/ssl/yourdomain.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/yourdomain.key
+
+    ServerName http://www.yourdomain.com
+    ServerAlias yourdomain.com
+    DocumentRoot /var/www/yourdomain
+
+    &lt;Directory /var/www/yourdomain&gt;
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre>
+<h3 id="Step-4-Permanent-Redirection-to-https"><a href="#Step-4-Permanent-Redirection-to-https" class="headerlink" title="Step 4 : Permanent Redirection to https :"></a>Step 4 : Permanent Redirection to https :</h3><p>To redirect your site permanently to https we will edit the VirtualHost entry for for 80 port which is in a file <code>yourdomin</code>in <code>/etc/apache2/site-available</code> folder of Apache, or else create one with below contain.</p>
+<pre><code class="config">&lt;VirtualHost *:80&gt;
+    ServerName http://www.yourdomain.com
+    ServerAlias yourdomain.com
+    DocumentRoot /var/www/yourdomain
+    Redirect / https://www.yourdomain.com
+&lt;/VirtualHost&gt;</code></pre>
+<p>Or else you can create <code>.htaccess</code> file in your site root folder for permanent redirection to https with below contain</p>
+<pre><code class="config">RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^yourdomain\.com$ [NC]
+RewriteRule ^ https://www.yourdomain.com%{REQUEST_URI} [L,R=301]</code></pre>
+<h3 id="Step-5-Test-your-Apache-config-and-activate-the-VirtualHost"><a href="#Step-5-Test-your-Apache-config-and-activate-the-VirtualHost" class="headerlink" title="Step 5 : Test your Apache config and activate the VirtualHost :"></a>Step 5 : Test your Apache config and activate the VirtualHost :</h3><p>It is always a good practice to check your Apache configuration for any error before we activate the VirtualHost and restart the Apache service, cause Apache will not start if your configuration file has some errors. Run below command to test configuration</p>
+<pre><code class="bash">$ apachectl configtest</code></pre>
+<p>If your configuration is right then activate the VirtualHost using below command</p>
+<pre><code class="bash">$ sudo a2ensite yourdomain      // Simple http configuration file 
+$ sudo a2ensite yourdomain-ssl     // SSL configuration file</code></pre>
+<p>Now, restart the Apache service for changes to take effect</p>
+<pre><code class="bash">$ sudo service apache2 restart</code></pre>
+<h3 id="Step-5-Test-your-Setup"><a href="#Step-5-Test-your-Setup" class="headerlink" title="Step 5 : Test your Setup :"></a>Step 5 : Test your Setup :</h3><p>Now, that we have everything prepared and done you can try visiting your server domain name or public IP using the https protocol like this <code>https://yourdomin.com.</code> You will get a security warning from browser regarding your server identity because we are using self-signed certificates and it has been not signed by any certificate authority that browser trust.</p>
+<p><a href="https://opensourceholic.files.wordpress.com/2014/05/ssl_warning.png" target="_blank" rel="noopener"><img src="https://opensourceholic.files.wordpress.com/2014/05/ssl_warning.png?w=646" alt="ssl_warning"></a></p>
+<p>Since this is expected you can move ahead, hit ‘Proceed Anyway’ button. Once Added Security Exception for your browser you will taken to the your site this time with encrypted traffic, check the SSL configuration by clicking on lock icon in address bar.</p>
+<p><a href="https://opensourceholic.files.wordpress.com/2014/05/encrypted.png" target="_blank" rel="noopener"><img src="http://opensourceholic.files.wordpress.com/2014/05/encrypted.png" alt="encrypted"></a></p>
+<p>Hope you find this tutorial helpful. Feel free to ask questions! Don’t forget to like or to leave a comment if its really help you.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci=''
+        data-cs=''
+        data-r='blog-comments'
+        data-o=''
+        data-a=''
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>meswapnilwagh</p>
+                    <span>Explore an unexplored horizon of Open Source with Me</span>
+                    <dl>
+                        <dd><a href="https://github.com/meswapnilwagh" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/meswapniwlagh" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">2 <p>Articles</p></a></li>
+                    <li><a href="/categories">2 <p>Categories</p></a></li>
+                    <li><a href="/tags">25 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prerequisites"><span class="toc-number">1.</span> <span class="toc-text">Prerequisites:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-Enable-SSL-module-in-Apache"><span class="toc-number">2.</span> <span class="toc-text">Step 1: Enable SSL module in Apache:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-Generate-a-Self-Signed-Certificates"><span class="toc-number">3.</span> <span class="toc-text">Step 2: Generate a Self-Signed Certificates:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-3-Configure-Apache-to-use-the-Signed-SSL-Certificate"><span class="toc-number">4.</span> <span class="toc-text">Step 3 : Configure Apache to use the Signed SSL Certificate :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-4-Permanent-Redirection-to-https"><span class="toc-number">5.</span> <span class="toc-text">Step 4 : Permanent Redirection to https :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-5-Test-your-Apache-config-and-activate-the-VirtualHost"><span class="toc-number">6.</span> <span class="toc-text">Step 5 : Test your Apache config and activate the VirtualHost :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-5-Test-your-Setup"><span class="toc-number">7.</span> <span class="toc-text">Step 5 : Test your Setup :</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            meswapnilwagh
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Explore an unexplored horizon of Open Source with Me", "Explore an unexplored horizon of Open Source with Me"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
