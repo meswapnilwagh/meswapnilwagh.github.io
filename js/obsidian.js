@@ -985,7 +985,7 @@ $(function () {
         if (shareComponent.css('opacity') != '1') {
           $(".share-component-cc").css('opacity', 1);
         } else {
-          $(".share-component-cc").css('opacity', 0);
+          $(".share-component-cc").css('opacity', 1);
         }
         break;
       case (tag.indexOf('icon-top02') != -1):
@@ -993,7 +993,7 @@ $(function () {
           scrollTop: 0
         }, 300);
         break;
-        // nav menu
+      // nav menu
       case (tag.indexOf('switchmenu') != -1):
         window.scrollTo(0, 0);
         $('html, body').toggleClass('mu');
@@ -1004,7 +1004,7 @@ $(function () {
           switchMenu.removeClass('icon-cross').addClass('icon-menu');
         }
         return false;
-        // next page
+      // next page
       case (tag.indexOf('more') != -1):
         tag = $('.more');
         if (tag.data('status') == 'loading') {
@@ -1045,7 +1045,7 @@ $(function () {
           tag.html(tag.attr('data-load-more')).data('status', 'loaded');
         });
         return false;
-        // home
+      // home
       case (tag.indexOf('icon-home') != -1):
         $('.toc').fadeOut(100);
         if ($('#preview').hasClass('show')) {
@@ -1054,7 +1054,7 @@ $(function () {
           location.href = $('.icon-home').data('url');
         }
         return false;
-        // qrcode
+      // qrcode
       case (tag.indexOf('icon-QRcode-o') != -1):
         if ($('.icon-scan').hasClass('tg')) {
           $('#qr').toggle();
@@ -1067,28 +1067,28 @@ $(function () {
           }).toggle();
         }
         return false;
-        // audio play
+      // audio play
       case (tag.indexOf('icon-play') != -1):
         $('#audio')[0].play();
         $('.icon-play').removeClass('icon-play').addClass('icon-pause');
         return false;
-        // audio pause
+      // audio pause
       case (tag.indexOf('icon-pause') != -1):
         $('#audio')[0].pause();
         $('.icon-pause').removeClass('icon-pause').addClass('icon-play');
         return false;
-        // history state
+      // history state
       case (tag.indexOf('posttitle') != -1):
         $('body').removeClass('fixed');
         Obsidian.HS($(e.target), 'push');
         // initialArticleTyped();
         return false;
-        // history state
+      // history state
       case (tag.indexOf('menu-link') != -1):
         $('body').removeClass('fixed');
         Obsidian.HS($(e.target), 'push');
         return false;
-        // prev, next post
+      // prev, next post
       case (rel == 'prev' || rel == 'next'):
         var t;
         if (rel == 'prev') {
@@ -1099,7 +1099,7 @@ $(function () {
         $(e.target).attr('title', t);
         Obsidian.HS($(e.target), 'replace');
         return false;
-        // toc
+      // toc
       case (tag.indexOf('toc-text') != -1 ||
         tag.indexOf('toc-link') != -1 ||
         tag.indexOf('toc-number') != -1):
@@ -1114,7 +1114,7 @@ $(function () {
           scrollTop: to.offset().top - 80
         }, 300);
         return false;
-        // quick view
+      // quick view
       case (tag.indexOf('pviewa') != -1):
         $('body').removeClass('mu');
         setTimeout(function () {
@@ -1122,7 +1122,7 @@ $(function () {
           $('.toc').fadeIn(1000);
         }, 300);
         return false;
-        // photoswipe
+      // photoswipe
       case (tag.indexOf('pimg') != -1):
         var pswpElement = $('.pswp').get(0);
         if (pswpElement) {
@@ -1165,7 +1165,7 @@ $(function () {
           lightBox.init();
         }
         return false;
-        // comment
+      // comment
       case -1 != tag.indexOf("comment"):
         Obsidian.loading(),
           comment = $('#gitalk-container');
