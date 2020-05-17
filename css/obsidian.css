@@ -255,7 +255,7 @@ audio {
   top: 0;
   left: 30%;
   width: 1200px;
-  height: 800px;
+  height: 680px;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0.85;
@@ -717,7 +717,7 @@ body.touch .article {
   border-left: 1px solid #201c29;
   border-right: 1px solid #201c29;
   z-index: 1 !important;
-  opacity: 0;
+  opacity: 1;
   transition: all 400ms ease-in-out;
 }
 .share .share-component a {
@@ -3080,9 +3080,9 @@ pre .keyword {
   color: #c9c;
 }
 .social-share .social-share-icon {
-  width: 22px;
-  height: 22px;
-  line-height: 22px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   font-size: 16px;
   transition: all 400ms linear;
 }
@@ -3101,9 +3101,9 @@ pre .keyword {
   box-shadow: none;
 }
 .animateOut#top .social-share .social-share-icon {
-  width: 18px;
-  height: 18px;
-  line-height: 18px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   font-size: 12px;
 }
 .gt-container a {
@@ -3157,9 +3157,9 @@ pre .keyword {
     box-shadow: none;
   }
   .animateOut#top .social-share .social-share-icon {
-    width: 18px;
-    height: 18px;
-    line-height: 18px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
     font-size: 12px;
   }
   .here {
